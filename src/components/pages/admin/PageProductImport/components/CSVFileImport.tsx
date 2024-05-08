@@ -26,9 +26,12 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
   const uploadFile = async () => {
     const response = await axios({
       method: "GET",
+      headers: {
+        Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
+      },
       url,
       params: {
-        name: file?.name ? encodeURIComponent(file.name) : '',
+        name: file?.name ? encodeURIComponent(file.name) : "",
       },
     });
     console.log("File to upload: ", file?.name);
